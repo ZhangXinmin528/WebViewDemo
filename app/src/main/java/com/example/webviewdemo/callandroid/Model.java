@@ -17,12 +17,12 @@ public class Model {
 
     @JavascriptInterface
     public void printLog() {
-        Log.i("tag", "JS调用了Android中的printLog方法！");
+        Log.i("tag==", "JS调用了Android中的printLog方法！");
     }
 
     @JavascriptInterface
     public void printString() {
-        Log.i("tag", "Model{" +
+        Log.i("tag==", "Model{" +
                 "name='" + name + '\'' +
                 '}');
     }

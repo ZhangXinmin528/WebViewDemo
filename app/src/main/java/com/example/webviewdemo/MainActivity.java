@@ -8,6 +8,7 @@ import android.view.View;
 
 import com.example.webviewdemo.callandroid.CallAndroidActivity;
 import com.example.webviewdemo.calljs.CallJSActicity;
+import com.example.webviewdemo.text.JSTextClickActivity;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -45,7 +46,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 startActivity(js);
                 break;
             case R.id.btn_text:
-                Intent text = new Intent(mContext, CallJSActicity.class);
+                Intent text = new Intent(mContext, JSTextClickActivity.class);
                 startActivity(text);
                 break;
         }

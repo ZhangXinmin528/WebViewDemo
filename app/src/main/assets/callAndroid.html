@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Carson</title>
+    JavaScript调用Android示例！
+    <script>
+
+        function callAndroidLog(){
+            // 由于对象映射，所以调用test对象等于调用Android映射的对象
+            <!--model.printLog();-->
+             model.printString();
+        }
+
+        function interceptUrl(){
+            /*约定的url协议为：js://webview?arg1=111&arg2=222*/
+            document.location = "js://webview?arg1=111&arg2=222";
+        }
+
+    </script>
+</head>
+<body>
+
+<br>
+通过addJavascriptInterface调用原生:
+<br>
+
+<br>
+<button type="button" onclick="callAndroidLog()">打印原生日志</button>
+<br>
+
+<br>
+通过shouldOverrideUrlLoading回调拦截Url:
+<br>
+
+<br>
+<input type="button" value="拦截回调" width="80%" onclick="interceptUrl()">
+<br>
+
+</body>
+</html>
