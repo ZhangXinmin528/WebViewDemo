@@ -1,19 +1,17 @@
 package com.example.webviewdemo.calljs;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.webkit.JsResult;
-import android.webkit.ValueCallback;
 import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
-import android.widget.Toast;
 
 import com.example.webviewdemo.R;
 
@@ -46,17 +44,21 @@ public class CallJSActicity extends AppCompatActivity {
                     @Override
                     public void run() {
                         //1.不需要获取返回值，性能要求较低
-                        //mWebView.loadUrl("javascript:callJS()");
+//                        mWebView.loadUrl("javascript:callJS()");
 
                         //2.效率高，兼容性差
-                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+                        /*if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
                             mWebView.evaluateJavascript("javascript:callJS()", new ValueCallback<String>() {
                                 @Override
                                 public void onReceiveValue(String value) {
 
                                 }
                             });
-                        }
+                        }*/
+
+                        //3.传参
+                        final String params = "123";
+                        mWebView.loadUrl("javascript:deliverParams(" + params + ")");
                     }
                 });
             }
@@ -81,6 +83,7 @@ public class CallJSActicity extends AppCompatActivity {
         });
     }
 
+    @SuppressLint("SetJavaScriptEnabled")
     private void initViews() {
         mWebView = (WebView) findViewById(R.id.webview_js);
 
