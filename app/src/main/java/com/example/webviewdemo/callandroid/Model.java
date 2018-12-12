@@ -16,8 +16,8 @@ public class Model {
     }
 
     @JavascriptInterface
-    public void printLog() {
-        Log.i("tag==", "JS调用了Android中的printLog方法！");
+    public String getName() {
+        return "zhangsan";
     }
 
     @JavascriptInterface

@@ -1,18 +1,23 @@
 package com.example.webviewdemo.callandroid;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.webkit.WebResourceRequest;
+import android.webkit.JsResult;
+import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
 import com.example.webviewdemo.R;
 
+import java.sql.Time;
 import java.util.HashMap;
 import java.util.Set;
 
@@ -27,6 +32,7 @@ import java.util.Set;
  */
 
 public class CallAndroidActivity extends AppCompatActivity {
+    private Context context;
     private WebView mWebView;
 
     @SuppressLint({"AddJavascriptInterface", "SetJavaScriptEnabled"})
@@ -34,6 +40,8 @@ public class CallAndroidActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_android);
+
+        context = this;
 
         mWebView = (WebView) findViewById(R.id.webview_android);
         WebSettings webSettings = mWebView.getSettings();
@@ -52,7 +60,7 @@ public class CallAndroidActivity extends AppCompatActivity {
         // 格式规定为:file:///android_asset/文件名.html
         mWebView.loadUrl("file:///android_asset/callAndroid.html");
 
-        mWebView.setWebViewClient(new WebViewClient(){
+        mWebView.setWebViewClient(new WebViewClient() {
 
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
@@ -62,7 +70,7 @@ public class CallAndroidActivity extends AppCompatActivity {
                 Uri uri = Uri.parse(url);
                 // 如果url的协议 = 预先约定的 js 协议
                 // 就解析往下解析参数
-                if ( uri.getScheme().equals("js")) {
+                if (uri.getScheme().equals("js")) {
 
                     // 如果 authority  = 预先约定协议里的 webview，即代表都符合约定的协议
                     // 所以拦截url,下面JS开始调用Android需要的方法
@@ -70,7 +78,7 @@ public class CallAndroidActivity extends AppCompatActivity {
 
                         //  步骤3：
                         // 执行JS所需要调用的逻辑
-                        Log.i("tag==","js调用了Android的方法");
+                        Log.i("tag==", "js调用了Android的方法");
                         // 可以在协议上带有参数并传递到Android上
                         HashMap<String, String> params = new HashMap<>();
                         Set<String> collection = uri.getQueryParameterNames();
@@ -82,7 +90,5 @@ public class CallAndroidActivity extends AppCompatActivity {
                 return super.shouldOverrideUrlLoading(view, url);
             }
         });
-
-
     }
 }
